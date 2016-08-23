@@ -23,6 +23,11 @@ class QueueConnectorTest extends FunSuite with BeforeAndAfterAll {
 
   override protected def afterAll(): Unit = {
     Await.result(system.terminate(), 3 seconds)
+    val queue = new QueueConnector(ConfigFactory.load("test.queue.conf").as[QueueConnectorConf]("queue"))
+    clearQueue(queue)
+    log.debug("push afterAll: test rabbitmq queue cleared!")
+    pushMessagesToRequestQueue(queue, 100)
+    log.debug("push afterAll: test rabbitmq queue, and 100 messages pushed for testing!")
   }
 
   test("factorial") {
@@ -32,8 +37,7 @@ class QueueConnectorTest extends FunSuite with BeforeAndAfterAll {
   }
 
   test("push pull") {
-    val queueConf = ConfigFactory.load("test.queue.conf").as[QueueConnectorConf]("queue")
-    val queue = new QueueConnector(queueConf)
+    val queue = new QueueConnector(ConfigFactory.load("test.queue.conf").as[QueueConnectorConf]("queue"))
     clearQueue(queue)
     log.debug("push pull test: test rabbitmq queue cleared!")
     pushMessagesToRequestQueue(queue, 10)
