@@ -144,19 +144,19 @@ Run
 > Nodes:
 
 1. Seed Node 1:
- (export seed1="akka.tcp://eva@127.0.0.1:2551"; export seed2="akka.tcp://eva@127.0.0.1:2552"; \
+ (export seed1="akka.tcp://127.0.0.1:2551"; export seed2="akka.tcp://127.0.0.1:2552"; \
  export host="127.0.0.1"; export port="2551"; ./run.seed.node.sh)
 2. Seed Node 2:
- (export seed1="akka.tcp://eva@127.0.0.1:2551"; export seed2="akka.tcp://eva@127.0.0.1:2552"; \
+ (export seed1="akka.tcp://127.0.0.1:2551"; export seed2="akka.tcp://127.0.0.1:2552"; \
  export host="127.0.0.1"; export port="2552"; ./run.seed.node.sh)
 3. Worker Node 1:
- (export seed1="akka.tcp://eva@127.0.0.1:2551"; export seed2="akka.tcp://eva@127.0.0.1:2552"; \
+ (export seed1="akka.tcp://127.0.0.1:2551"; export seed2="akka.tcp://127.0.0.1:2552"; \
  export host="127.0.0.1"; export port="2553"; ./run.worker.node.sh)
 4. Worker Node 2:
- (export seed1="akka.tcp://eva@127.0.0.1:2551"; export seed2="akka.tcp://eva@127.0.0.1:2552"; \
+ (export seed1="akka.tcp://127.0.0.1:2551"; export seed2="akka.tcp://127.0.0.1:2552"; \
  export host="127.0.0.1"; export port="2554"; ./run.worker.node.sh)
 5. Master Node 1:
- (export seed1="akka.tcp://eva@127.0.0.1:2551"; export seed2="akka.tcp://eva@127.0.0.1:2552"; \
+ (export seed1="akka.tcp://127.0.0.1:2551"; export seed2="akka.tcp://127.0.0.1:2552"; \
  export host="127.0.0.1"; export port="2555"; export queue="amqp://guest:guest@127.0.0.1:5672"; ./run.master.node.sh)
 
 Warning
