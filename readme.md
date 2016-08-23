@@ -113,7 +113,7 @@ Integration Test
 ----------------
 1. sbt clean it:test
 
->Currently the connector integration test pushes **100** MapGeometry json messages to the request queue,
+>Currently the connector integration test pushes **100** Factorial json messages to the request queue,
 allowing for just-in-time EVA cluster testing. The Queue actor will automatically pull these messages
 from the request queue. If you want to push more messages to the request queue, while the EVA cluster
 is up, simply rerun the integration test.
