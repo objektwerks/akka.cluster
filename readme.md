@@ -1,4 +1,4 @@
-Framework
+Factorial
 ---------
 >Akka cluster project --- using per-request dynamic master-worker teams. See **viewme.pdf** for details.
 
