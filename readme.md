@@ -92,15 +92,6 @@ RabbitMQ
 >**Note**: A local or network instance of RabbitMQ must be available for (1) integration
 tests and (2) deployment ( See: Run > Master Node 1 below for details )
 
-Gerrit
-------
-1. git clone ssh://mfunk@gerrit.it.here.com:29418/CME/EVA/Framework
-2. git add .
-3. git commit -m "message"
-    1. git add.
-    2. git commit —-amend --no-edit
-4. git push origin HEAD:refs/for/master
-
 Compile
 -------
 1. sbt clean compile
@@ -114,13 +105,9 @@ Integration Test
 1. sbt clean it:test
 
 >Currently the connector integration test pushes **100** Factorial json messages to the request queue,
-allowing for just-in-time EVA cluster testing. The Queue actor will automatically pull these messages
-from the request queue. If you want to push more messages to the request queue, while the EVA cluster
-is up, simply rerun the integration test.
-
-2. ./test.map.geometry.publish.sh
-
->Currently, this pushes 1 MapGeometry json message to the request queue.
+allowing for just-in-time cluster testing. The Queue actor will automatically pull these messages from
+the request queue. If you want to push more messages to the request queue, while the EVA cluster is up,
+simply rerun the integration test.
 
 Pack
 ----
