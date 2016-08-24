@@ -9,7 +9,7 @@ object Master {
 }
 
 class Master(broker: ActorRef, workerRouter: ActorRef) extends Actor {
-  context.setReceiveTimeout(60 minutes)
+  context.setReceiveTimeout(3 minutes)
 
   override def receive: Receive = {
     case command @ DoFactorial(id, input) =>
