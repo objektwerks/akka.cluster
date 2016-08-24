@@ -175,8 +175,5 @@ VisualVM
 2. Plugins: Tools > Plugins ( select mbeans, etc ... )
 3. Monitor: MasterNode, WorkerNode and SeedNodes
 
->**Note** Via VisualVM Applications left tree panel, select Remote > Add Remote Host...,
-and enter IP: 10.228.17.133:7099 to monitor Akka cluster nodes on test server dchieva01.
-
->**Durations** Select the running masternode JVM, MBeans tab and eva.masternode.durations MBean
+>**Durations** Select the running masternode JVM, MBeans tab and objektwerks.masternode.durations MBean
 to view current and average request/response pair durations.

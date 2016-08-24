@@ -25,7 +25,7 @@ private object Durations {
   import scala.collection.mutable
   private val durations = new mutable.ArrayBuffer[Long]()
   private val mbean = new DurationsTracker()
-  private val mbeanName = new ObjectName("eva.masternode:type=durations")
+  private val mbeanName = new ObjectName("objektwerks.masternode:type=durations")
   ManagementFactory.getPlatformMBeanServer.registerMBean(mbean, mbeanName)
 
   def average(duration: Duration): String = {
