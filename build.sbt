@@ -1,6 +1,6 @@
 import sbt.Keys._
 
-val akkaVersion = "2.4.8"
+val akkaVersion = "2.4.9"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
@@ -41,7 +41,7 @@ lazy val testDependencies = {
     "com.typesafe.play" % "play-json_2.11" % "2.5.3" % "provided",
     "org.slf4j" % "slf4j-api" % "1.7.21" % "test, it",
     "ch.qos.logback" % "logback-classic" % "1.1.3" % "test, it",
-    "org.scalatest" % "scalatest_2.11" % "2.2.6" % "test, it"
+    "org.scalatest" % "scalatest_2.11" % "3.0.0" % "test, it"
   )
 }
 
