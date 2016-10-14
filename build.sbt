@@ -1,6 +1,6 @@
 import sbt.Keys._
 
-val akkaVersion = "2.4.9"
+val akkaVersion = "2.4.11"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
