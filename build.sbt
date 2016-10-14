@@ -1,6 +1,7 @@
 import sbt.Keys._
 
 val akkaVersion = "2.4.11"
+val amqpClientVersion = "3.6.5"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
@@ -36,7 +37,7 @@ lazy val testDependencies = {
     "com.typesafe.akka" % "akka-cluster_2.11" % akkaVersion % "provided, test",
     "com.typesafe.akka" % "akka-cluster-metrics_2.11" % akkaVersion % "provided, test",
     "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion % "provided, test",
-    "com.rabbitmq" % "amqp-client" % "3.6.3" % "provided",
+    "com.rabbitmq" % "amqp-client" % amqpClientVersion % "provided",
     "net.ceedubs" % "ficus_2.11" % "1.1.2" % "provided",
     "com.typesafe.play" % "play-json_2.11" % "2.5.3" % "provided",
     "org.slf4j" % "slf4j-api" % "1.7.21" % "test, it",
@@ -59,7 +60,7 @@ lazy val akkaDependencies = {
     "com.typesafe.akka" % "akka-remote_2.11" % akkaVersion,
     "com.typesafe.akka" % "akka-cluster-metrics_2.11" % akkaVersion,
     "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion,
-    "com.rabbitmq" % "amqp-client" % "3.6.3",
+    "com.rabbitmq" % "amqp-client" % amqpClientVersion,
     "net.ceedubs" % "ficus_2.11" % "1.1.2",
     "com.typesafe.play" % "play-json_2.11" % "2.5.3",
     "com.esotericsoftware.kryo" % "kryo" % "2.24.0",
