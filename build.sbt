@@ -1,7 +1,7 @@
 import sbt.Keys._
 
-val akkaVersion = "2.4.11"
-val amqpClientVersion = "3.6.5"
+val akkaVersion = "2.4.14"
+val amqpClientVersion = "4.0.0"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
@@ -14,12 +14,18 @@ lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   javaOptions in run += "-Xss1m -Xmx2g",
   scalacOptions ++= Seq(
     "-language:postfixOps",
+    "-language:reflectiveCalls",
     "-language:implicitConversions",
+    "-language:higherKinds",
     "-feature",
+    "-Ywarn-unused-import",
+    "-Ywarn-unused",
+    "-Ywarn-dead-code",
     "-unchecked",
     "-deprecation",
-    "-Xlint",
-    "-Xfatal-warnings"
+    "-Xfatal-warnings",
+    "-Xlint:missing-interpolator",
+    "-Xlint"
   ),
   fork in run := true
 )
@@ -41,8 +47,8 @@ lazy val testDependencies = {
     "net.ceedubs" % "ficus_2.11" % "1.1.2" % "provided",
     "com.typesafe.play" % "play-json_2.11" % "2.5.3" % "provided",
     "org.slf4j" % "slf4j-api" % "1.7.21" % "test, it",
-    "ch.qos.logback" % "logback-classic" % "1.1.3" % "test, it",
-    "org.scalatest" % "scalatest_2.11" % "3.0.0" % "test, it"
+    "ch.qos.logback" % "logback-classic" % "1.1.7" % "test, it",
+    "org.scalatest" % "scalatest_2.11" % "3.0.1" % "test, it"
   )
 }
 
@@ -67,7 +73,7 @@ lazy val akkaDependencies = {
     "tv.cntt" % "chill-akka_2.11" % "1.1",
     "io.kamon" % "sigar-loader" % "1.6.6-rev002",
     "org.slf4j" % "slf4j-api" % "1.7.21",
-    "ch.qos.logback" % "logback-classic" % "1.1.3"
+    "ch.qos.logback" % "logback-classic" % "1.1.7"
   )
 }
 
