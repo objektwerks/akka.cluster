@@ -18,8 +18,6 @@ lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
     "-language:implicitConversions",
     "-language:higherKinds",
     "-feature",
-    "-Ywarn-unused-import",
-    "-Ywarn-unused",
     "-Ywarn-dead-code",
     "-unchecked",
     "-deprecation",
@@ -45,9 +43,9 @@ lazy val testDependencies = {
     "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion % "provided, test",
     "com.rabbitmq" % "amqp-client" % amqpClientVersion % "provided",
     "net.ceedubs" % "ficus_2.11" % "1.1.2" % "provided",
-    "com.typesafe.play" % "play-json_2.11" % "2.5.3" % "provided",
-    "org.slf4j" % "slf4j-api" % "1.7.21" % "test, it",
-    "ch.qos.logback" % "logback-classic" % "1.1.7" % "test, it",
+    "com.typesafe.play" % "play-json_2.11" % "2.5.15" % "provided",
+    "org.slf4j" % "slf4j-api" % "1.7.25" % "test, it",
+    "ch.qos.logback" % "logback-classic" % "1.2.3" % "test, it",
     "org.scalatest" % "scalatest_2.11" % "3.0.3" % "test, it"
   )
 }
@@ -68,12 +66,12 @@ lazy val akkaDependencies = {
     "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion,
     "com.rabbitmq" % "amqp-client" % amqpClientVersion,
     "net.ceedubs" % "ficus_2.11" % "1.1.2",
-    "com.typesafe.play" % "play-json_2.11" % "2.5.3",
+    "com.typesafe.play" % "play-json_2.11" % "2.5.15",
     "com.esotericsoftware.kryo" % "kryo" % "2.24.0",
     "tv.cntt" % "chill-akka_2.11" % "1.1",
     "io.kamon" % "sigar-loader" % "1.6.6",
-    "org.slf4j" % "slf4j-api" % "1.7.21",
-    "ch.qos.logback" % "logback-classic" % "1.1.7"
+    "org.slf4j" % "slf4j-api" % "1.7.25",
+    "ch.qos.logback" % "logback-classic" % "1.2.3"
   )
 }
 
