@@ -48,7 +48,7 @@ lazy val testDependencies = {
     "com.typesafe.play" % "play-json_2.11" % "2.5.3" % "provided",
     "org.slf4j" % "slf4j-api" % "1.7.21" % "test, it",
     "ch.qos.logback" % "logback-classic" % "1.1.7" % "test, it",
-    "org.scalatest" % "scalatest_2.11" % "3.0.1" % "test, it"
+    "org.scalatest" % "scalatest_2.11" % "3.0.3" % "test, it"
   )
 }
 
@@ -71,7 +71,7 @@ lazy val akkaDependencies = {
     "com.typesafe.play" % "play-json_2.11" % "2.5.3",
     "com.esotericsoftware.kryo" % "kryo" % "2.24.0",
     "tv.cntt" % "chill-akka_2.11" % "1.1",
-    "io.kamon" % "sigar-loader" % "1.6.6-rev002",
+    "io.kamon" % "sigar-loader" % "1.6.6",
     "org.slf4j" % "slf4j-api" % "1.7.21",
     "ch.qos.logback" % "logback-classic" % "1.1.7"
   )
