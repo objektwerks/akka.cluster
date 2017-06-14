@@ -1,12 +1,12 @@
 import sbt.Keys._
 
-val akkaVersion = "2.4.14"
-val amqpClientVersion = "4.0.0"
+val akkaVersion = "2.5.2"
+val amqpClientVersion = "4.1.1"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.1-SNAPSHOT",
-  scalaVersion := "2.11.8",
+  scalaVersion := "2.11.11",
   ivyScala := ivyScala.value map {
     _.copy(overrideScalaVersion = true)
   },
