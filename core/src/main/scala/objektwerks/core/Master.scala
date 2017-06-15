@@ -1,6 +1,6 @@
 package objektwerks.core
 
-import akka.actor.{Actor, ActorRef, Props, ReceiveTimeout}
+import akka.actor.{Actor, ActorRef, ReceiveTimeout}
 
 import scala.concurrent.duration._
 
@@ -8,7 +8,7 @@ class Master(broker: ActorRef, workerRouter: ActorRef) extends Actor {
   context.setReceiveTimeout(3 minutes)
 
   override def receive: Receive = {
-    case command @ DoFactorial(id, input) =>
+    case command @ DoFactorial(_, _) =>
       implicit val ec = context.dispatcher
       context.system.scheduler.scheduleOnce(100 millis, workerRouter, command)
     case event @ FactorialDone(_, _) =>
