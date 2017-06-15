@@ -29,13 +29,13 @@ class Broker extends Actor with WorkerRouter with ActorLogging {
   val masterToIdMapping = TrieMap.empty[ActorRef, Id]
   val queue = context.actorOf(Props[Queue], name = "queue")
   val newMasterName = () => s"master-${masterNumber.incrementAndGet()}"
-  val getMapWork = () => if(availableWorkers.intValue > masterToIdMapping.size) queue ! GetFactorial
+  val getFactorial = () => if(availableWorkers.intValue > masterToIdMapping.size) queue ! GetFactorial
 
-  context.system.scheduler.schedule(1 minute, 10 seconds)(getMapWork())
+  context.system.scheduler.schedule(1 minute, 10 seconds)(getFactorial())
 
   override def receive: Receive = {
     case command: DoFactorial =>
-      val master = context.actorOf(Master.props(self, workerRouter), name = newMasterName())
+      val master = context.actorOf(Props(classOf[Master], self, workerRouter), name = newMasterName())
       masterToIdMapping += (master -> command.id)
       master ! command
     case event: FactorialDone =>

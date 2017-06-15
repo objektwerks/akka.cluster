@@ -4,10 +4,6 @@ import akka.actor.{Actor, ActorRef, Props, ReceiveTimeout}
 
 import scala.concurrent.duration._
 
-object Master {
-  def props(broker: ActorRef, workerRouter: ActorRef): Props = Props(classOf[Master], broker, workerRouter)
-}
-
 class Master(broker: ActorRef, workerRouter: ActorRef) extends Actor {
   context.setReceiveTimeout(3 minutes)
 
@@ -15,7 +11,7 @@ class Master(broker: ActorRef, workerRouter: ActorRef) extends Actor {
     case command @ DoFactorial(id, input) =>
       implicit val ec = context.dispatcher
       context.system.scheduler.scheduleOnce(100 millis, workerRouter, command)
-    case event @ FactorialDone(id, output) =>
+    case event @ FactorialDone(_, _) =>
       broker ! event
       context.stop(self)
     case ReceiveTimeout =>
