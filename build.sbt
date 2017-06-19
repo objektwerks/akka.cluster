@@ -2,6 +2,10 @@ import sbt.Keys._
 
 val akkaVersion = "2.5.2"
 val amqpClientVersion = "4.1.1"
+val playJsonVersion = "2.5.15"
+val ficusVersion = "1.4.1"
+val slf4jApiVersion = "1.7.25"
+val logbackClassicVersion = "1.2.3"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
@@ -42,10 +46,10 @@ lazy val testDependencies = {
     "com.typesafe.akka" % "akka-cluster-metrics_2.11" % akkaVersion % "provided, test",
     "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion % "provided, test",
     "com.rabbitmq" % "amqp-client" % amqpClientVersion % "provided",
-    "net.ceedubs" % "ficus_2.11" % "1.1.2" % "provided",
-    "com.typesafe.play" % "play-json_2.11" % "2.5.15" % "provided",
-    "org.slf4j" % "slf4j-api" % "1.7.25" % "test, it",
-    "ch.qos.logback" % "logback-classic" % "1.2.3" % "test, it",
+    "com.iheart" % "ficus_2.11" % ficusVersion % "provided",
+    "com.typesafe.play" % "play-json_2.11" % playJsonVersion % "provided",
+    "org.slf4j" % "slf4j-api" % slf4jApiVersion % "test, it",
+    "ch.qos.logback" % "logback-classic" % logbackClassicVersion % "test, it",
     "org.scalatest" % "scalatest_2.11" % "3.0.3" % "test, it"
   )
 }
@@ -65,13 +69,13 @@ lazy val akkaDependencies = {
     "com.typesafe.akka" % "akka-cluster-metrics_2.11" % akkaVersion,
     "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion,
     "com.rabbitmq" % "amqp-client" % amqpClientVersion,
-    "net.ceedubs" % "ficus_2.11" % "1.1.2",
-    "com.typesafe.play" % "play-json_2.11" % "2.5.15",
+    "com.iheart" % "ficus_2.11" % ficusVersion,
+    "com.typesafe.play" % "play-json_2.11" % playJsonVersion,
     "com.esotericsoftware.kryo" % "kryo" % "2.24.0",
     "tv.cntt" % "chill-akka_2.11" % "1.1",
     "io.kamon" % "sigar-loader" % "1.6.6",
-    "org.slf4j" % "slf4j-api" % "1.7.25",
-    "ch.qos.logback" % "logback-classic" % "1.2.3"
+    "org.slf4j" % "slf4j-api" % slf4jApiVersion,
+    "ch.qos.logback" % "logback-classic" % logbackClassicVersion
   )
 }
 
