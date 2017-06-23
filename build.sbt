@@ -1,6 +1,6 @@
 import sbt.Keys._
 
-val akkaVersion = "2.5.2"
+val akkaVersion = "2.5.3"
 val amqpClientVersion = "4.1.1"
 val playJsonVersion = "2.5.15"
 val ficusVersion = "1.4.1"
