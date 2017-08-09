@@ -11,9 +11,6 @@ lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.1-SNAPSHOT",
   scalaVersion := "2.11.11",
-  ivyScala := ivyScala.value map {
-    _.copy(overrideScalaVersion = true)
-  },
   javaOptions in compile += "-Xss1m -Xmx2g",
   javaOptions in run += "-Xss1m -Xmx2g",
   scalacOptions ++= Seq(
