@@ -10,7 +10,7 @@ val logbackClassicVersion = "1.2.3"
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.1-SNAPSHOT",
-  scalaVersion := "2.11.11",
+  scalaVersion := "2.11.12",
   javaOptions in compile += "-Xss1m -Xmx2g",
   javaOptions in run += "-Xss1m -Xmx2g",
   scalacOptions ++= Seq(
@@ -47,7 +47,7 @@ lazy val testDependencies = {
     "com.typesafe.play" % "play-json_2.11" % playJsonVersion % "provided",
     "org.slf4j" % "slf4j-api" % slf4jApiVersion % "test, it",
     "ch.qos.logback" % "logback-classic" % logbackClassicVersion % "test, it",
-    "org.scalatest" % "scalatest_2.11" % "3.0.3" % "test, it"
+    "org.scalatest" % "scalatest_2.11" % "3.0.5" % "test, it"
   )
 }
 
