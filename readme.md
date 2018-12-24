@@ -1,6 +1,7 @@
-Factorial
----------
->Akka cluster project --- using per-request dynamic master-worker teams. See **viewme.pdf** for details.
+Akka Cluster
+------------
+>Akka cluster project --- using per-request dynamic master-worker teams to yield factorials.
+See **viewme.pdf** for details.
 
 Note
 ----
