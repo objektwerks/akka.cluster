@@ -2,6 +2,11 @@ Factorial
 ---------
 >Akka cluster project --- using per-request dynamic master-worker teams. See **viewme.pdf** for details.
 
+Note
+----
+>This project is for browsing. In an attempt to continuely upgrade dependencies
+the compiletime/runtime behavior of this project is not like the original.;)
+
 Project
 -------
 >A **multi-project** sbt project:
