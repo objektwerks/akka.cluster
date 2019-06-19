@@ -2,6 +2,7 @@ Akka Cluster
 ------------
 >Akka cluster project --- using per-request dynamic master-worker teams to yield factorials.
 >See **viewme.pdf** for details.
+>**WARNING** I cleverly managed to break the build by foolishly upgrading dependencies. I'll fix it someday.;)
 
 Project
 -------
