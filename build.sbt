@@ -1,7 +1,7 @@
 val akkaVersion = "2.4.20"
 val amqpClientVersion = "4.1.1"
-val playJsonVersion = "2.5.15"
-val ficusVersion = "1.4.1"
+val playJsonVersion = "2.7.4"
+val ficusVersion = "1.4.7"
 val slf4jApiVersion = "1.7.25"
 val logbackClassicVersion = "1.2.3"
 
@@ -35,39 +35,39 @@ lazy val integrationTestSettings = Defaults.itSettings ++ Seq(
 
 lazy val testDependencies = {
   Seq(
-    "com.typesafe.akka" % "akka-actor_2.11" % akkaVersion % "provided, test",
-    "com.typesafe.akka" % "akka-remote_2.11" % akkaVersion % "provided, test",
-    "com.typesafe.akka" % "akka-cluster_2.11" % akkaVersion % "provided, test",
-    "com.typesafe.akka" % "akka-cluster-metrics_2.11" % akkaVersion % "provided, test",
-    "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion % "provided, test",
+    "com.typesafe.akka" %% "akka-actor" % akkaVersion % "provided, test",
+    "com.typesafe.akka" %% "akka-remote" % akkaVersion % "provided, test",
+    "com.typesafe.akka" %% "akka-cluster" % akkaVersion % "provided, test",
+    "com.typesafe.akka" %% "akka-cluster-metrics" % akkaVersion % "provided, test",
+    "com.typesafe.akka" %% "akka-slf4j" % akkaVersion % "provided, test",
     "com.rabbitmq" % "amqp-client" % amqpClientVersion % "provided",
-    "com.iheart" % "ficus_2.11" % ficusVersion % "provided",
-    "com.typesafe.play" % "play-json_2.11" % playJsonVersion % "provided",
+    "com.iheart" %% "ficus" % ficusVersion % "provided",
+    "com.typesafe.play" %% "play-json" % playJsonVersion % "provided",
     "org.slf4j" % "slf4j-api" % slf4jApiVersion % "test, it",
     "ch.qos.logback" % "logback-classic" % logbackClassicVersion % "test, it",
-    "org.scalatest" % "scalatest_2.11" % "3.0.5" % "test, it"
+    "org.scalatest" %% "scalatest" % "3.0.8" % "test, it"
   )
 }
 
 lazy val clusterDependencies = {
   Seq(
-    "com.typesafe.akka" % "akka-actor_2.11" % akkaVersion % "provided",
-    "com.typesafe.akka" % "akka-cluster_2.11" % akkaVersion % "provided",
-    "com.typesafe.akka" % "akka-cluster-metrics_2.11" % akkaVersion % "provided"
+    "com.typesafe.akka" %% "akka-actor" % akkaVersion % "provided",
+    "com.typesafe.akka" %% "akka-cluster" % akkaVersion % "provided",
+    "com.typesafe.akka" %% "akka-cluster-metrics" % akkaVersion % "provided"
   )
 }
 
 lazy val akkaDependencies = {
   Seq(
-    "com.typesafe.akka" % "akka-actor_2.11" % akkaVersion,
-    "com.typesafe.akka" % "akka-remote_2.11" % akkaVersion,
-    "com.typesafe.akka" % "akka-cluster-metrics_2.11" % akkaVersion,
-    "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion,
+    "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+    "com.typesafe.akka" %% "akka-remote" % akkaVersion,
+    "com.typesafe.akka" %% "akka-cluster-metrics" % akkaVersion,
+    "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
     "com.rabbitmq" % "amqp-client" % amqpClientVersion,
-    "com.iheart" % "ficus_2.11" % ficusVersion,
-    "com.typesafe.play" % "play-json_2.11" % playJsonVersion,
+    "com.iheart" %% "ficus" % ficusVersion,
+    "com.typesafe.play" %% "play-json" % playJsonVersion,
     "com.esotericsoftware.kryo" % "kryo" % "2.24.0",
-    "tv.cntt" % "chill-akka_2.11" % "1.1",
+    "tv.cntt" %% "chill-akka" % "1.1",
     "io.kamon" % "sigar-loader" % "1.6.6",
     "org.slf4j" % "slf4j-api" % slf4jApiVersion,
     "ch.qos.logback" % "logback-classic" % logbackClassicVersion
@@ -76,8 +76,8 @@ lazy val akkaDependencies = {
 
 lazy val akkaDependencyOverrides = {
   Set(
-    "com.typesafe.akka" % "akka-actor_2.11" % akkaVersion,
-    "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion
+    "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+    "com.typesafe.akka" %% "akka-slf4j" % akkaVersion
   )
 }
 
@@ -116,7 +116,7 @@ lazy val workerNodeSettings = commonSettings ++ packAutoSettings ++ Seq(
   packJvmOpts := Map("worker-node" -> Seq("-server", "-Xss1m", "-Xms1g", "-Xmx32g"))
 )
 
-lazy val root = (project in file(".")).
+lazy val akkaclusterx = (project in file(".")).
   settings(rootSettings: _*).
   aggregate(cluster, core, seednode, masternode, workernode)
 lazy val cluster = project.
