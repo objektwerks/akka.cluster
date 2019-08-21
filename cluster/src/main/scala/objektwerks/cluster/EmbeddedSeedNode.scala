@@ -25,6 +25,6 @@ class EmbeddedSeedNode(app: String,
 
   def terminate(): Unit = {
     implicit val ec = system.dispatcher
-    Await.result(system.terminate(), 3 seconds)
+    Await.result(system.terminate, 3 seconds)
   }
 }
