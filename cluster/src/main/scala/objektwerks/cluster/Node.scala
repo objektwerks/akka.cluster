@@ -8,11 +8,10 @@ import scala.concurrent.Await
 import scala.concurrent.duration._
 
 abstract class Node extends App {
+  if (args.isEmpty) throw new IllegalArgumentException("arg 0 must specify the node conf file.")
+
   private implicit val timeout = Timeout(30 seconds)
-  private val conf = if (args.isEmpty)
-    throw new IllegalArgumentException("arg 0 must specify the node conf file.")
-  else
-    args(0)
+  private val conf = args(0)
   private val config = ConfigFactory.load(conf)
   private val appName = config.getString("app")
   private val clusterEventListenerEnabled = config.getBoolean("clusterEventListenerEnabled")
@@ -24,6 +23,6 @@ abstract class Node extends App {
 
   sys.addShutdownHook {
     implicit val ec = system.dispatcher
-    Await.result(system.terminate(), 30 seconds)
+    Await.result(system.terminate, 30 seconds)
   }
 }
