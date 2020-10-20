@@ -10,6 +10,7 @@ import akka.routing.RoundRobinGroup
 
 import scala.collection.concurrent.TrieMap
 import scala.concurrent.duration._
+import scala.language.postfixOps
 
 sealed trait WorkerRouter {
   this: Actor =>

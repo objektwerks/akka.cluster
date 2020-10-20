@@ -2,6 +2,7 @@ package objektwerks.core
 
 import java.lang.management.ManagementFactory
 import java.time.{Duration, LocalDateTime}
+
 import javax.management.ObjectName
 
 import play.api.libs.json.Json
@@ -14,8 +15,6 @@ final case class Factorial(input: Long, output: Long)
 
 object Factorial {
   private implicit val factorialFormat = Json.format[Factorial]
-  private implicit val factorialFormatRead = Json.reads[Factorial]
-  private implicit val factorialFormatWrite = Json.writes[Factorial]
 
   def toJson(math: Factorial): String = Json.toJson(math).toString
   def toFactorial(json: String): Factorial = Json.parse(json).as[Factorial]
