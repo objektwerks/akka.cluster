@@ -54,7 +54,7 @@ lazy val akkaDependencies = {
     "com.iheart" %% "ficus" % ficusVersion,
     "com.typesafe.play" %% "play-json" % playJsonVersion,
     "com.esotericsoftware.kryo" % "kryo5" % "5.0.0",
-    // "tv.cntt" %% "chill-akka" % "1.1",
+    // TODO: Still required? "tv.cntt" %% "chill-akka" % "1.1",
     "io.kamon" % "sigar-loader" % "1.6.6",
     "org.slf4j" % "slf4j-api" % slf4jApiVersion,
     "ch.qos.logback" % "logback-classic" % logbackClassicVersion
