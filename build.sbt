@@ -4,7 +4,7 @@ val akkaVersion = "2.6.10"
 val amqpClientVersion = "5.9.0"
 val playJsonVersion = "2.9.1"
 val ficusVersion = "1.5.0"
-val slf4jApiVersion = "1.7.25"
+val slf4jApiVersion = "1.7.30"
 val logbackClassicVersion = "1.2.3"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
