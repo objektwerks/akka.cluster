@@ -19,7 +19,7 @@ sealed trait WorkerRouter {
     totalInstances = 100,
     routeesPaths = List("/user/worker"),
     allowLocalRoutees = false,
-    useRole = Some("worker"))
+    useRoles = "worker")
   val workerRouter = context.actorOf(ClusterRouterGroup(group, settings).props, name = "workerRouter")
 }
 
@@ -30,9 +30,13 @@ class Broker extends Actor with WorkerRouter with ActorLogging {
   val masterToIdMapping = TrieMap.empty[ActorRef, Id]
   val queue = context.actorOf(Props[Queue], name = "queue")
   val newMasterName = () => s"master-${masterNumber.incrementAndGet()}"
-  val getFactorial = () => if(availableWorkers.intValue > masterToIdMapping.size) queue ! GetFactorial
 
-  context.system.scheduler.schedule(1 minute, 10 seconds)(getFactorial())
+  def runFactorial: Runnable = 
+    new Runnable {
+      override def run(): Unit = if(availableWorkers.intValue > masterToIdMapping.size) queue ! GetFactorial
+    }
+
+  context.system.scheduler.scheduleWithFixedDelay(1 minute, 10 seconds)(runFactorial)
 
   override def receive: Receive = {
     case command: DoFactorial =>
