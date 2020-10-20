@@ -6,6 +6,7 @@ val playJsonVersion = "2.9.1"
 val ficusVersion = "1.5.0"
 val slf4jApiVersion = "1.7.30"
 val logbackClassicVersion = "1.2.3"
+val scalatestVersion = "3.0.9"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
@@ -27,20 +28,20 @@ lazy val testDependencies = {
     "com.typesafe.akka" %% "akka-cluster" % akkaVersion % "provided, test",
     "com.typesafe.akka" %% "akka-cluster-metrics" % akkaVersion % "provided, test",
     "com.typesafe.akka" %% "akka-slf4j" % akkaVersion % "provided, test",
-    "com.rabbitmq" % "amqp-client" % amqpClientVersion % "provided",
-    "com.iheart" %% "ficus" % ficusVersion % "provided",
-    "com.typesafe.play" %% "play-json" % playJsonVersion % "provided",
+    "com.rabbitmq" % "amqp-client" % amqpClientVersion % Provided,
+    "com.iheart" %% "ficus" % ficusVersion % Provided,
+    "com.typesafe.play" %% "play-json" % playJsonVersion % Provided,
     "org.slf4j" % "slf4j-api" % slf4jApiVersion % "test, it",
     "ch.qos.logback" % "logback-classic" % logbackClassicVersion % "test, it",
-    "org.scalatest" %% "scalatest" % "3.0.9" % "test, it"
+    "org.scalatest" %% "scalatest" % scalatestVersion % "test, it"
   )
 }
 
 lazy val clusterDependencies = {
   Seq(
-    "com.typesafe.akka" %% "akka-actor" % akkaVersion % "provided",
-    "com.typesafe.akka" %% "akka-cluster" % akkaVersion % "provided",
-    "com.typesafe.akka" %% "akka-cluster-metrics" % akkaVersion % "provided"
+    "com.typesafe.akka" %% "akka-actor" % akkaVersion % Provided,
+    "com.typesafe.akka" %% "akka-cluster" % akkaVersion % Provided,
+    "com.typesafe.akka" %% "akka-cluster-metrics" % akkaVersion % Provided
   )
 }
 
@@ -53,7 +54,7 @@ lazy val akkaDependencies = {
     "com.rabbitmq" % "amqp-client" % amqpClientVersion,
     "com.iheart" %% "ficus" % ficusVersion,
     "com.typesafe.play" %% "play-json" % playJsonVersion,
-    "com.esotericsoftware.kryo" % "kryo5" % "5.0.0",
+    "com.esotericsoftware.kryo" % "kryo5" % "5.0.0", // TODO: Will this new version work?
     // TODO: Still required? "tv.cntt" %% "chill-akka" % "1.1",
     "io.kamon" % "sigar-loader" % "1.6.6",
     "org.slf4j" % "slf4j-api" % slf4jApiVersion,
