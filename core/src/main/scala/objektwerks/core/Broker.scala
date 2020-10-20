@@ -20,7 +20,7 @@ sealed trait WorkerRouter {
     routeesPaths = List("/user/worker"),
     allowLocalRoutees = false,
     useRoles = "worker")
-  val workerRouter = context.actorOf(ClusterRouterGroup(group, settings).props, name = "workerRouter")
+  val workerRouter = context.actorOf(ClusterRouterGroup(group, settings).props(), name = "workerRouter")
 }
 
 class Broker extends Actor with WorkerRouter with ActorLogging {
@@ -28,7 +28,7 @@ class Broker extends Actor with WorkerRouter with ActorLogging {
   val availableWorkers = new AtomicInteger()
   val masterNumber = new AtomicInteger()
   val masterToIdMapping = TrieMap.empty[ActorRef, Id]
-  val queue = context.actorOf(Props[Queue], name = "queue")
+  val queue = context.actorOf(Props[Queue](), name = "queue")
   val newMasterName = () => s"master-${masterNumber.incrementAndGet()}"
 
   def runFactorial: Runnable = 
@@ -44,11 +44,11 @@ class Broker extends Actor with WorkerRouter with ActorLogging {
       masterToIdMapping += (master -> command.id)
       master ! command
     case event: FactorialDone =>
-      masterToIdMapping -= sender
+      masterToIdMapping -= sender()
       queue ! event
       queue ! GetFactorial
     case WorkTimedOut =>
-      val id = masterToIdMapping.remove(sender).getOrElse(Id(-1))
+      val id = masterToIdMapping.remove(sender()).getOrElse(Id(-1))
       queue ! WorkFailed(id)
     case MemberUp(member) =>
       if (member.hasRole("worker")) {

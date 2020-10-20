@@ -23,7 +23,7 @@ class EmbeddedSeedNode(app: String,
   private val system = ActorSystem.create(app, config)
 
   def terminate(): Unit = {
-    Await.result(system.terminate, 3 seconds)
+    Await.result(system.terminate(), 3 seconds)
     ()
   }
 }

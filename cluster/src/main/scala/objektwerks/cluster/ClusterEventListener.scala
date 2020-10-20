@@ -14,6 +14,6 @@ class ClusterEventListener extends Actor with ActorLogging {
   }
 
   override def receive: Receive = {
-    case event: ClusterDomainEvent => log.info("Actor: {} Event: {}", sender.path.name, event)
+    case event: ClusterDomainEvent => log.info("Actor: {} Event: {}", sender().path.name, event)
   }
 }

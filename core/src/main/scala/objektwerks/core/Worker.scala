@@ -10,7 +10,7 @@ class Worker extends Actor with ActorLogging {
       log.info("*** input: {} : {}", id.queueId, input)
       val output = Factorial(input.input, factorial(input.input))
       log.info("*** answer: {} : {}", id.queueId, output)
-      sender ! FactorialDone(id, output)
+      sender() ! FactorialDone(id, output)
   }
 
   @tailrec

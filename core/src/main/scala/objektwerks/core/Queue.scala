@@ -19,7 +19,7 @@ class Queue extends Actor with ActorLogging {
           val json = new String(item.getBody, StandardCharsets.UTF_8)
           log.info("*** request queue id: {} : {}", queueId, json)
           val input = Factorial.toFactorial(json)
-          sender ! DoFactorial(id, input)
+          sender() ! DoFactorial(id, input)
       }
     case FactorialDone(id, output) =>
       val json = Factorial.toJson(output)

@@ -6,6 +6,6 @@ import objektwerks.core.Broker
 
 object MasterNode extends Node {
   Cluster(system).registerOnMemberUp {
-    system.actorOf(Props[Broker], name = "broker")
+    system.actorOf(Props[Broker](), name = "broker")
   }
 }

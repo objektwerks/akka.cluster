@@ -10,7 +10,7 @@ val logbackClassicVersion = "1.2.3"
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.1-SNAPSHOT",
-  scalaVersion := "2.12.12",
+  scalaVersion := "2.13.3",
   javaOptions in compile += "-Xss1m -Xmx2g",
   javaOptions in run += "-Xss1m -Xmx2g"
 )

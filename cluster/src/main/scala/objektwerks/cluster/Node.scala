@@ -17,11 +17,11 @@ abstract class Node extends App {
   private val clusterMetricsListenerEnabled = config.getBoolean("clusterMetricsListenerEnabled")
 
   protected val system = ActorSystem.create(appName, config)
-  if (clusterEventListenerEnabled) system.actorOf(Props[ClusterEventListener])
-  if (clusterMetricsListenerEnabled) system.actorOf(Props[ClusterMetricsListener])
+  if (clusterEventListenerEnabled) system.actorOf(Props[ClusterEventListener]())
+  if (clusterMetricsListenerEnabled) system.actorOf(Props[ClusterMetricsListener]())
 
   sys.addShutdownHook {
-    Await.result(system.terminate, 30 seconds)
+    Await.result(system.terminate(), 30 seconds)
     ()
   }
 }
