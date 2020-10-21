@@ -1,6 +1,7 @@
 package objektwerks.cluster
 
 import akka.actor.ActorSystem
+
 import com.typesafe.config.ConfigFactory
 
 import scala.concurrent.Await

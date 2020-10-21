@@ -1,6 +1,7 @@
 package objektwerks.cluster
 
 import akka.actor.{ActorSystem, Props}
+
 import com.typesafe.config.ConfigFactory
 
 import scala.concurrent.Await
@@ -8,7 +9,7 @@ import scala.concurrent.duration._
 import scala.language.postfixOps
 
 abstract class Node extends App {
-  if (args.isEmpty) throw new IllegalArgumentException("arg 0 must specify the node conf file.")
+  require(args.nonEmpty, "commandline arg 0 must specify the node conf file.")
 
   private val conf = args(0)
   private val config = ConfigFactory.load(conf)

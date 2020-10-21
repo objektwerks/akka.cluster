@@ -10,13 +10,9 @@ class ClusterMetricsListener extends Actor with ActorLogging {
   private val cluster = Cluster(system)
   private val metrics = ClusterMetricsExtension.get(system)
 
-  override def preStart(): Unit = {
-    metrics.subscribe(self)
-  }
+  override def preStart(): Unit = metrics.subscribe(self)
 
-  override def postStop(): Unit = {
-    metrics.unsubscribe(self)
-  }
+  override def postStop(): Unit = metrics.unsubscribe(self)
 
   override def receive: Receive = {
     case ClusterMetricsChanged(clusterMetrics) =>
@@ -27,8 +23,7 @@ class ClusterMetricsListener extends Actor with ActorLogging {
   }
 
   private def logHeap(nodeMetrics: NodeMetrics): Unit = nodeMetrics match {
-    case HeapMemory(_, _, used, _, _) =>
-      log.info("Used heap: %.2f MB".format(used.doubleValue / 1024 / 1024))
+    case HeapMemory(_, _, used, _, _) => log.info("Used heap: %.2f MB".format(used.doubleValue / 1024 / 1024))
   }
 
   private def logCpu(nodeMetrics: NodeMetrics): Unit = nodeMetrics match {
