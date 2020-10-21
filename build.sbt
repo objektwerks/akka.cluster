@@ -92,20 +92,25 @@ lazy val workerNodeSettings = commonSettings ++ packSettings ++ Seq(
   packJvmOpts := Map("worker-node" -> Seq("-server", "-Xss1m", "-Xms1g", "-Xmx32g"))
 )
 
-lazy val cluster = project.
-  settings(clusterSettings: _*)
 lazy val core = project.
   settings(coreSettings: _*).
   configs(IntegrationTest)
+
+lazy val cluster = project.
+  settings(clusterSettings: _*)
+
 lazy val seednode = project.
   settings(seedNodeSettings: _*).
   dependsOn(cluster)
+
 lazy val masternode = project.
   settings(masterNodeSettings: _*).
   dependsOn(cluster, core)
+
 lazy val workernode = project.
   settings(workerNodeSettings: _*).
   dependsOn(cluster, core)
+
 lazy val akkacluster = (project in file(".")).
   settings(rootSettings: _*).
-  aggregate(cluster, core, seednode, masternode, workernode)
+  aggregate(core, cluster, seednode, masternode, workernode)
