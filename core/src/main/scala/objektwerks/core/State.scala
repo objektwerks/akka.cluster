@@ -19,6 +19,7 @@ object Factorial {
   private implicit val factorialFormat = Json.format[Factorial]
 
   def toJson(math: Factorial): String = Json.toJson(math).toString
+
   def toFactorial(json: String): Factorial = Json.parse(json).as[Factorial]
 }
 
@@ -26,6 +27,7 @@ private object Durations {
   private val durations = new mutable.ArrayBuffer[Long]()
   private val mbean = new DurationsTracker()
   private val mbeanName = new ObjectName("objektwerks.masternode:type=durations")
+
   ManagementFactory.getPlatformMBeanServer.registerMBean(mbean, mbeanName)
 
   def average(duration: Duration): String = {
