@@ -11,9 +11,7 @@ val scalatestVersion = "3.0.9"
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.1-SNAPSHOT",
-  scalaVersion := "2.13.3",
-  javaOptions in compile += "-Xss1m -Xmx2g",
-  javaOptions in run += "-Xss1m -Xmx2g"
+  scalaVersion := "2.13.3"
 )
 
 lazy val integrationTestSettings = Defaults.itSettings ++ Seq(
@@ -94,9 +92,6 @@ lazy val workerNodeSettings = commonSettings ++ packSettings ++ Seq(
   packJvmOpts := Map("worker-node" -> Seq("-server", "-Xss1m", "-Xms1g", "-Xmx32g"))
 )
 
-lazy val akkacluster = (project in file(".")).
-  settings(rootSettings: _*).
-  aggregate(cluster, core, seednode, masternode, workernode)
 lazy val cluster = project.
   settings(clusterSettings: _*)
 lazy val core = project.
@@ -111,3 +106,6 @@ lazy val masternode = project.
 lazy val workernode = project.
   settings(workerNodeSettings: _*).
   dependsOn(cluster, core)
+lazy val akkacluster = (project in file(".")).
+  settings(rootSettings: _*).
+  aggregate(cluster, core, seednode, masternode, workernode)
