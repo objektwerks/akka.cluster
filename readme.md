@@ -48,7 +48,7 @@ Scheduler
 
 1. On MemberUp cluster events
 2. On FactorialDone message
-3. Via this scheduler: ```context.system.scheduler.schedule(1 minute, 10 seconds)(getFactorial())```
+3. Via this scheduler: ```context.system.scheduler.schedule(1 minute, 10 seconds)(runFactorial)```
 
 >If the scheduler discovers (1) ZERO active Master actors **OR** (2) more available Worker actors than active Master
 actors, then Broker actor sends the Queue actor a GetFactorial message.
