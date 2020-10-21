@@ -3,7 +3,9 @@ package objektwerks.core
 import java.nio.charset.StandardCharsets
 
 import akka.actor.{Actor, ActorLogging}
+
 import com.typesafe.config.ConfigFactory
+
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 

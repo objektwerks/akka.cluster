@@ -16,9 +16,9 @@ class Queue(requestQueue: QueueConnector, responseQueue: QueueConnector) extends
           val id = item.getEnvelope.getDeliveryTag
           val message = new String(item.getBody, StandardCharsets.UTF_8)
           log.debug("request: {}", id)
-          sender ! Request(id, message)
+          sender() ! Request(id, message)
         case None =>
-          sender ! Shutdown
+          sender() ! Shutdown
       }
     case Response(id, message) =>
       log.debug("response: {}", id)

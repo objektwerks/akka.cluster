@@ -63,9 +63,7 @@ class Broker extends Actor with WorkerRouter with ActorLogging {
       }
   }
 
-  override def preStart(): Unit = {
-    Cluster(context.system).subscribe(self, initialStateMode = InitialStateAsEvents, classOf[MemberUp], classOf[ReachableMember])
-  }
+  override def preStart(): Unit = Cluster(context.system).subscribe(self, InitialStateAsEvents, classOf[MemberUp], classOf[ReachableMember])
 
   override def postStop(): Unit = Cluster(context.system).unsubscribe(self)
 }
