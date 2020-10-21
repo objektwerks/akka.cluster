@@ -1,6 +1,6 @@
 package objektwerks.core
 
-sealed trait Command
+sealed trait Command extends Product with Serializable
 
 case object GetFactorial extends Command
 

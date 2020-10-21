@@ -7,6 +7,8 @@ import javax.management.ObjectName
 
 import play.api.libs.json.Json
 
+import scala.collection.mutable
+
 final case class Id(queueId: Long, received: LocalDateTime = LocalDateTime.now) {
   def duration: String = Durations.average(Duration.between(received, LocalDateTime.now))
 }
@@ -21,7 +23,6 @@ object Factorial {
 }
 
 private object Durations {
-  import scala.collection.mutable
   private val durations = new mutable.ArrayBuffer[Long]()
   private val mbean = new DurationsTracker()
   private val mbeanName = new ObjectName("objektwerks.masternode:type=durations")
