@@ -1,6 +1,7 @@
 package objektwerks.cluster
 
 import akka.actor.Props
+
 import objektwerks.core.Worker
 
 object WorkerNode extends Node {
