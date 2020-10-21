@@ -66,12 +66,12 @@ lazy val rootSettings = Seq(
   publish := {}
 )
 
-lazy val clusterSettings = commonSettings ++ Seq(
-  libraryDependencies ++= clusterDependencies
-)
-
 lazy val coreSettings = commonSettings ++ integrationTestSettings ++ Seq(
   libraryDependencies ++= testDependencies
+)
+
+lazy val clusterSettings = commonSettings ++ Seq(
+  libraryDependencies ++= clusterDependencies
 )
 
 lazy val seedNodeSettings = commonSettings ++ packSettings ++ Seq(
