@@ -9,11 +9,11 @@ class Master(broker: ActorRef, workerRouter: ActorRef) extends Actor {
   context.setReceiveTimeout(3 minutes)
 
   override def receive: Receive = {
-    case command @ DoFactorial(_, _) =>
+    case command @ ComputeFactorial(_, _) =>
       implicit val ec = context.dispatcher
       context.system.scheduler.scheduleOnce(100 millis, workerRouter, command)
       ()
-    case event @ FactorialDone(_, _) =>
+    case event @ FactorialComputed(_, _) =>
       broker ! event
       context.stop(self)
     case ReceiveTimeout =>

@@ -14,16 +14,16 @@ class Queue extends Actor with ActorLogging {
   val responseQueue = new QueueConnector(ConfigFactory.load("response.queue.conf").as[QueueConnectorConf]("queue"))
 
   override def receive: Receive = {
-    case GetFactorial =>
+    case PullFactorial =>
       requestQueue.pull.foreach { item =>
           val queueId = item.getEnvelope.getDeliveryTag
           val id = Id(queueId)
           val json = new String(item.getBody, StandardCharsets.UTF_8)
           log.info("*** request queue id: {} : {}", queueId, json)
           val factorialIn = Factorial.toFactorial(json)
-          sender() ! DoFactorial(id, factorialIn)
+          sender() ! ComputeFactorial(id, factorialIn)
       }
-    case FactorialDone(id, factorialOut) =>
+    case FactorialComputed(id, factorialOut) =>
       val json = Factorial.toJson(factorialOut)
       val isConfirmed = responseQueue.push(json)
       if (isConfirmed) requestQueue.ack(id.queueId) else self ! FactorialFailed(id)

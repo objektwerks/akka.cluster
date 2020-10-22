@@ -33,27 +33,27 @@ class Broker extends Actor with WorkerRouter with ActorLogging {
 
   def runFactorial: Runnable = 
     new Runnable {
-      override def run(): Unit = if(availableWorkers.intValue > masterToIdMapping.size) queue ! GetFactorial
+      override def run(): Unit = if(availableWorkers.intValue > masterToIdMapping.size) queue ! PullFactorial
     }
 
   context.system.scheduler.scheduleWithFixedDelay(1 minute, 10 seconds)(runFactorial)
 
   override def receive: Receive = {
-    case command: DoFactorial =>
+    case command: ComputeFactorial =>
       val master = context.actorOf(Props(classOf[Master], self, workerRouter), name = newMasterName())
       masterToIdMapping += (master -> command.id)
       master ! command
-    case event: FactorialDone =>
+    case event: FactorialComputed =>
       masterToIdMapping -= sender()
       queue ! event
-      queue ! GetFactorial
+      queue ! PullFactorial
     case FactorialTimedOut =>
       val id = masterToIdMapping.remove(sender()).getOrElse(Id(-1))
       queue ! FactorialFailed(id)
     case MemberUp(member) =>
       if (member.hasRole("worker")) {
         availableWorkers.incrementAndGet()
-        queue ! GetFactorial
+        queue ! PullFactorial
         log.info("*** worker up: {}", member.address)
       }
     case MemberRemoved(member, _) =>

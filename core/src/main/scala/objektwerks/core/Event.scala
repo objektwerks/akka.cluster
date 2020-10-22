@@ -2,7 +2,7 @@ package objektwerks.core
 
 sealed trait Event extends Product with Serializable
 
-final case class FactorialDone(id: Id, output: Factorial) extends Event
+final case class FactorialComputed(id: Id, factorialOut: Factorial) extends Event
 
 case object FactorialTimedOut extends Event
 

@@ -2,6 +2,6 @@ package objektwerks.core
 
 sealed trait Command extends Product with Serializable
 
-case object GetFactorial extends Command
+case object PullFactorial extends Command
 
-final case class DoFactorial(id: Id, input: Factorial) extends Command
+final case class ComputeFactorial(id: Id, factorialIn: Factorial) extends Command
