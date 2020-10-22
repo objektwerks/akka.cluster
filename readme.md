@@ -104,6 +104,7 @@ Test
 Integration Test
 ----------------
 1. sbt clean it:test
+>View RabbitMQ Web UI at: http://http://localhost:15672/  ( user: guest, password: guest )
 
 >Currently the connector integration test pushes **100** Factorial json messages to the request queue,
 allowing for just-in-time cluster testing. The Queue actor will automatically pull these messages from
