@@ -19,17 +19,10 @@ lazy val integrationTestSettings = Defaults.itSettings ++ Seq(
   fork in IntegrationTest := false
 )
 
-lazy val testDependencies = {
+lazy val integrationTestDependencies = {
   Seq(
-    "com.typesafe.akka" %% "akka-actor" % akkaVersion % "provided, test",
-    "com.typesafe.akka" %% "akka-remote" % akkaVersion % "provided, test",
-    "com.typesafe.akka" %% "akka-cluster" % akkaVersion % "provided, test",
-    "com.typesafe.akka" %% "akka-cluster-metrics" % akkaVersion % "provided, test",
-    "com.typesafe.akka" %% "akka-slf4j" % akkaVersion % "provided, test",
     "com.rabbitmq" % "amqp-client" % amqpClientVersion % Provided,
     "com.iheart" %% "ficus" % ficusVersion % Provided,
-    "com.typesafe.play" %% "play-json" % playJsonVersion % Provided,
-    "ch.qos.logback" % "logback-classic" % logbackClassicVersion % "test, it",
     "org.scalatest" %% "scalatest" % scalatestVersion % "test, it"
   )
 }
@@ -52,7 +45,6 @@ lazy val akkaDependencies = {
     "com.iheart" %% "ficus" % ficusVersion,
     "com.typesafe.play" %% "play-json" % playJsonVersion,
     "io.altoo" %% "akka-kryo-serialization" % "1.1.5",
-    "org.slf4j" % "slf4j-api" % slf4jApiVersion,
     "ch.qos.logback" % "logback-classic" % logbackClassicVersion
   )
 }
@@ -64,7 +56,8 @@ lazy val rootSettings = Seq(
 )
 
 lazy val coreSettings = commonSettings ++ integrationTestSettings ++ Seq(
-  libraryDependencies ++= testDependencies
+  libraryDependencies ++= akkaDependencies,
+  libraryDependencies ++= integrationTestDependencies
 )
 
 lazy val clusterSettings = commonSettings ++ Seq(
