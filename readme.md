@@ -46,7 +46,7 @@ Scheduler
 >The Broker actor pulls messages via the Queue actor in the following ways:
 
 1. On MemberUp cluster events
-2. On FactorialDone message
+2. On FactorialComputed message
 3. Via this scheduler: ```context.system.scheduler.schedule(1 minute, 10 seconds)(runFactorial)```
 
 >If the scheduler discovers (1) ZERO active Master actors **OR** (2) more available Worker actors than active Master
@@ -107,11 +107,6 @@ Integration Test
 ----------------
 1. sbt clean it:test
 >View RabbitMQ Web UI at: http://http://localhost:15672/  [ user: guest, password: guest ]
-
->Currently the connector integration test pushes **100** Factorial json messages to the request queue,
-allowing for just-in-time cluster testing. The Queue actor will automatically pull these messages from
-the request queue. If you want to push more messages to the request queue, while the Akka cluster is up,
-simply rerun the integration test.
 
 Pack
 ----

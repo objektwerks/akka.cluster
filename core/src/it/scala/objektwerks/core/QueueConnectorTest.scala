@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
-import scala.io.Source
 import scala.language.postfixOps
 
 class QueueConnectorTest extends AnyFunSuite with BeforeAndAfterAll {
@@ -28,17 +27,7 @@ class QueueConnectorTest extends AnyFunSuite with BeforeAndAfterAll {
 
   override protected def afterAll(): Unit = {
     Await.result(system.terminate(), 3 seconds)
-    val queue = new QueueConnector(ConfigFactory.load("test.queue.conf").as[QueueConnectorConf]("queue"))
-    clearQueue(queue)
-    logger.debug("*** push afterAll: test rabbitmq queue cleared!")
-    pushMessagesToRequestQueue(queue, 100)
-    logger.debug("*** push afterAll: test rabbitmq queue, and 100 messages pushed for testing!")
-  }
-
-  test("factorial") {
-    val factorialJson = Source.fromInputStream(getClass.getResourceAsStream("/factorial.json")).mkString
-    val factorial = Factorial.toFactorial(factorialJson)
-    logger.debug(Factorial.toJson(factorial))
+    ()
   }
 
   test("push pull") {
@@ -64,22 +53,22 @@ class QueueConnectorTest extends AnyFunSuite with BeforeAndAfterAll {
     responseQueue.close()
   }
 
-  private def pushMessagesToRequestQueue(queue: QueueConnector, number: Int): Unit = {
+  private def pushMessagesToRequestQueue(queue: QueueConnector, count: Int): Unit = {
     val counter = new AtomicInteger()
     val confirmed = new AtomicInteger()
-    for (_ <- 1 to number) {
+    for (_ <- 1 to count) {
       val message = s"*** test.request: ${counter.incrementAndGet}"
       val isComfirmed = queue.push(message)
       if (isComfirmed) confirmed.incrementAndGet
     }
-    assert(confirmed.intValue == number)
+    assert(confirmed.intValue == count)
     ()
   }
 
-  private def pullMessagesFromRequestQueue(queue: QueueConnector, number: Int): Unit = {
+  private def pullMessagesFromRequestQueue(queue: QueueConnector, count: Int): Unit = {
     val pulled = new AtomicInteger()
-    for (_ <- 1 to number) if(queue.pull.nonEmpty) pulled.incrementAndGet
-    assert(pulled.intValue == number)
+    for (_ <- 1 to count) if(queue.pull.nonEmpty) pulled.incrementAndGet
+    assert(pulled.intValue == count)
     ()
   }
 
