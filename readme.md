@@ -149,10 +149,6 @@ Run
  (export seed1="akka.tcp://127.0.0.1:2551"; export seed2="akka.tcp://127.0.0.1:2552"; \
  export host="127.0.0.1"; export port="2555"; export queue="amqp://guest:guest@127.0.0.1:5672"; ./run.master.node.sh)
 
-Logs
-----
->See **./logs**
-
 VisualVM
 --------
 1. Install: ( https://visualvm.java.net/download.html )
