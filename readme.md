@@ -109,7 +109,7 @@ Integration Test
 >**View** the RabbitMQ Web UI at: http://http://localhost:15672/  [ user: guest, password: guest ]
 
 >**Note** the QueueConnectorTest posts 100 factorial json messages to the ```request.queue```
->in the ```afterAll``` method, allowing for convenient testing of a live Akka cluster.
+>in the ```afterAll``` method, allowing for convenient automated testing of a live Akka cluster.
 
 Pack
 ----
