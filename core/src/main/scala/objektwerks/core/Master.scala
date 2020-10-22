@@ -17,7 +17,7 @@ class Master(broker: ActorRef, workerRouter: ActorRef) extends Actor {
       broker ! event
       context.stop(self)
     case ReceiveTimeout =>
-      broker ! WorkTimedOut
+      broker ! FactorialTimedOut
       context.stop(self)
   }
 }

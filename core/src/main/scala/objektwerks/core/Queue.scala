@@ -20,15 +20,15 @@ class Queue extends Actor with ActorLogging {
           val id = Id(queueId)
           val json = new String(item.getBody, StandardCharsets.UTF_8)
           log.info("*** request queue id: {} : {}", queueId, json)
-          val input = Factorial.toFactorial(json)
-          sender() ! DoFactorial(id, input)
+          val factorialIn = Factorial.toFactorial(json)
+          sender() ! DoFactorial(id, factorialIn)
       }
-    case FactorialDone(id, output) =>
-      val json = Factorial.toJson(output)
+    case FactorialDone(id, factorialOut) =>
+      val json = Factorial.toJson(factorialOut)
       val isConfirmed = responseQueue.push(json)
-      if (isConfirmed) requestQueue.ack(id.queueId) else self ! WorkFailed(id)
+      if (isConfirmed) requestQueue.ack(id.queueId) else self ! FactorialFailed(id)
       log.info("*** response queue id: {} in {} : {}", id.queueId, id.duration, json)
-    case WorkFailed(id) =>
+    case FactorialFailed(id) =>
       log.info("*** request queue failure id: {}", id.queueId)
       requestQueue.nack(id.queueId)
   }

@@ -8,7 +8,7 @@ class Worker extends Actor with ActorLogging {
   override def receive: Receive = {
     case DoFactorial(id, factorialIn) =>
       log.info("*** factorial in: {} : {}", id.queueId, factorialIn)
-      val factorialOut = Factorial(factorialIn.input, factorial(factorialIn.input))
+      val factorialOut = Factorial(factorialIn.numberIn, factorial(factorialIn.numberIn))
       log.info("*** factorial out: {} : {}", id.queueId, factorialOut)
       sender() ! FactorialDone(id, factorialOut)
   }

@@ -47,9 +47,9 @@ class Broker extends Actor with WorkerRouter with ActorLogging {
       masterToIdMapping -= sender()
       queue ! event
       queue ! GetFactorial
-    case WorkTimedOut =>
+    case FactorialTimedOut =>
       val id = masterToIdMapping.remove(sender()).getOrElse(Id(-1))
-      queue ! WorkFailed(id)
+      queue ! FactorialFailed(id)
     case MemberUp(member) =>
       if (member.hasRole("worker")) {
         availableWorkers.incrementAndGet()

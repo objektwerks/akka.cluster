@@ -13,7 +13,7 @@ final case class Id(queueId: Long, received: LocalDateTime = LocalDateTime.now) 
   def duration: String = Durations.average(Duration.between(received, LocalDateTime.now))
 }
 
-final case class Factorial(input: Long, output: Long)
+final case class Factorial(numberIn: Long, numberOut: Long)
 
 object Factorial {
   private implicit val factorialFormat = Json.format[Factorial]
