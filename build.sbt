@@ -16,7 +16,7 @@ lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
 
 lazy val integrationTestSettings = Defaults.itSettings ++ Seq(
   parallelExecution in IntegrationTest := false,
-  fork in IntegrationTest := true
+  fork in IntegrationTest := false
 )
 
 lazy val testDependencies = {
