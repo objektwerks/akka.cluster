@@ -6,11 +6,11 @@ import scala.annotation.tailrec
 
 class Worker extends Actor with ActorLogging {
   override def receive: Receive = {
-    case DoFactorial(id, input) =>
-      log.info("*** input: {} : {}", id.queueId, input)
-      val output = Factorial(input.input, factorial(input.input))
-      log.info("*** answer: {} : {}", id.queueId, output)
-      sender() ! FactorialDone(id, output)
+    case DoFactorial(id, factorialIn) =>
+      log.info("*** factorial in: {} : {}", id.queueId, factorialIn)
+      val factorialOut = Factorial(factorialIn.input, factorial(factorialIn.input))
+      log.info("*** factorial out: {} : {}", id.queueId, factorialOut)
+      sender() ! FactorialDone(id, factorialOut)
   }
 
   @tailrec
