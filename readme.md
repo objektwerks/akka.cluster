@@ -1,16 +1,16 @@
 Akka Cluster
 ------------
 >Akka cluster project --- using per-request dynamic master-worker teams to yield factorials.
->See **viewme.pdf** for details.
+>See ***viewme.pdf*** for details.
 
 Project
 -------
->A **multi-project** sbt project:
+>A ***multi-project*** sbt project:
 
 1. cluster
 2. core
-3. seednode
-4. masternode
+3. masternode
+4. seednode
 5. workernode
 
 Cluster
@@ -33,27 +33,26 @@ Actors
 
 Routers
 -------
-1. Worker Router - A cluster-aware group router containing a dynamic pool of available remote Worker actors. See Broker actor.
+1. Worker Router - A cluster-aware group router containing a dynamic pool of available remote Worker actors. See Broker actor code.
 
 Design
 ------
 >The cluster is architecturally centered around the Broker actor, which resides on the master node and **dynamically**
-pulls messages from RabbitMQ via a Queue actor and creates Master actors just-in-time that delegate work to a
+pulls messages from RabbitMQ via a Queue actor and creates Master actors ***just-in-time*** that delegate work to a
 Worker actor on a worker node.
-
 
 Scheduler
 ---------
->The Broker actor pulls messages via the Queue actor as follows:
+>The Broker actor pulls messages via the Queue actor in the following ways:
 
 1. On MemberUp cluster events
 2. On FactorialDone message
 3. Via this scheduler: ```context.system.scheduler.schedule(1 minute, 10 seconds)(runFactorial)```
 
 >If the scheduler discovers (1) ZERO active Master actors **OR** (2) more available Worker actors than active Master
-actors, then Broker actor sends the Queue actor a GetFactorial message.
+actors, then the Broker actor sends the Queue actor a GetFactorial message.
 
-Tuning
+Timing
 ------
 >The Master actor, created dynamically by the Broker actor, has a time-to-live , which is currently set to:
 
@@ -63,35 +62,38 @@ Tuning
 the Broker actor, which tells a Queue actor to send a NACK message to RabbitMQ - retaining the origial request on
 RabbitMQ for future processing. This value is **TUNABLE**!
 
-Memory
-------
+Worker Memory
+-------------
 >In the build.sbt, tune the JVM options as required.
 
 ```
-lazy val workerNodeSettings = commonSettings ++ publishSettings ++ packAutoSettings ++ Seq(
-  libraryDependencies ++=  mapContextDependencies,
+lazy val workerNodeSettings = commonSettings ++ packSettings ++ Seq(
   libraryDependencies ++=  akkaDependencies,
-  dependencyOverrides ++= akkaDependencyOverrides,
   packCopyDependenciesUseSymbolicLinks := false,
-  packExcludeJars := Seq("hammer-commons-2.15.jar"),
   packJvmOpts := Map("worker-node" -> Seq("-server", "-Xss1m", "-Xms1g", "-Xmx32g"))
 )
 ```
 
 RabbitMQ
 --------
-1. Install RabbitMQ ( https://www.rabbitmq.com/download.html )
-2. Install RabbitMQ Management Web UI ( https://www.rabbitmq.com/management.html )
+1. RabbitMQ ( https://www.rabbitmq.com/download.html )
+2. RabbitMQ Management Web UI ( https://www.rabbitmq.com/management.html )
 3. rabbitmqadmin - https://www.rabbitmq.com/management-cli.html
 4. rabbitmqctl - https://www.rabbitmq.com/man/rabbitmqctl.1.man.html
-6. Restart:
+5. web ui - http://http://localhost:15672/  [ user: guest, password: guest ]
+6. restart sequence:
     1. rabbitmqctl stop_app
     2. rabbitmqctl reset
     3. rabbitmqctl start_app
     4. rabbitmqctl list_queues name messages_ready messages_unacknowledged
+>A local or network instance of RabbitMQ must be available for (1) integration
+tests and (2) deployment ( See: Run > Master Node 1 below for details. )
 
->**Note**: A local or network instance of RabbitMQ must be available for (1) integration
-tests and (2) deployment ( See: Run > Master Node 1 below for details )
+RabbitMQ Homebrew
+-----------------
+1. brew install rabbitmq
+2. brew services start | stop rabbitmq
+3. rabbitmq web ui - http://http://localhost:15672/  [ user: guest, password: guest ]
 
 Compile
 -------
@@ -104,11 +106,11 @@ Test
 Integration Test
 ----------------
 1. sbt clean it:test
->View RabbitMQ Web UI at: http://http://localhost:15672/  ( user: guest, password: guest )
+>View RabbitMQ Web UI at: http://http://localhost:15672/  [ user: guest, password: guest ]
 
 >Currently the connector integration test pushes **100** Factorial json messages to the request queue,
 allowing for just-in-time cluster testing. The Queue actor will automatically pull these messages from
-the request queue. If you want to push more messages to the request queue, while the EVA cluster is up,
+the request queue. If you want to push more messages to the request queue, while the Akka cluster is up,
 simply rerun the integration test.
 
 Pack
@@ -154,7 +156,7 @@ Run
 
 Warning
 -------
->Launching seednode, workernode and masternode will produce a **false** Sigar library exception:
+>Launching seednode, workernode and masternode produces a **false** Sigar library exception:
 
   **org.hyperic.sigar.SigarException: no libsigar-universal64-macosx.dylib in java.library.path**
 
