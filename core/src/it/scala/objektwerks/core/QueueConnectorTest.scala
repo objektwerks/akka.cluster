@@ -3,13 +3,22 @@ package objektwerks.core
 import java.util.concurrent.atomic.AtomicInteger
 
 import com.typesafe.config.ConfigFactory
-
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 
+import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 
-class QueueConnectorTest extends AnyFunSuite {
+class QueueConnectorTest extends AnyFunSuite with BeforeAndAfterAll {
+  override protected def afterAll(): Unit = {
+    val queue = new QueueConnector(ConfigFactory.load("request.queue.conf").as[QueueConnectorConf]("queue"))
+    for (i <- 1 to 100) {
+      val factorial = Factorial(numberIn = i, numberOut = 0)
+      queue.push( Factorial.toJson(factorial) )
+    }
+    queue.close()
+  }
+
   test("push > pull") {
     val queue = new QueueConnector(ConfigFactory.load("test.queue.conf").as[QueueConnectorConf]("queue"))
     clearQueue(queue)

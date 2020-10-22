@@ -14,7 +14,7 @@ class Worker extends Actor with ActorLogging {
   }
 
   @tailrec
-  private def factorial(number: Long, accumulator: Long = 1): Long = number match {
+  private def factorial(number: Int, accumulator: Long = 1): Long = number match {
     case i if i < 1 => accumulator
     case _ => factorial(number - 1, accumulator * number)
   }
