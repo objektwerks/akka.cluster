@@ -154,21 +154,6 @@ Run
  (export seed1="akka.tcp://127.0.0.1:2551"; export seed2="akka.tcp://127.0.0.1:2552"; \
  export host="127.0.0.1"; export port="2555"; export queue="amqp://guest:guest@127.0.0.1:5672"; ./run.master.node.sh)
 
-Warning
--------
->Launching seednode, workernode and masternode produces a **false** Sigar library exception:
-
-  **org.hyperic.sigar.SigarException: no libsigar-universal64-macosx.dylib in java.library.path**
-
->When Sigar fails to find its native library dependency in java.library.path, it downloads it to ${user.dir}/sigar,
-which is configurable in seed.conf, worker.conf and master.conf. See the **native-library-extract-folder** property.
-
->Sigar then logs this message:
-
-  **Sigar library provisioned: ./sigar/libsigar-universal64-macosx.dylib**
-
->And, then, all is well.
-
 Logs
 ----
 >See **./logs**
