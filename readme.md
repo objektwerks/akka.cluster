@@ -106,8 +106,9 @@ Test
 Integration Test
 ----------------
 1. sbt clean it:test
->View RabbitMQ Web UI at: http://http://localhost:15672/  [ user: guest, password: guest ]
->**Note**The QueueConnectorTest posts 100 factorial json messages to the ```request.queue```
+>**View** the RabbitMQ Web UI at: http://http://localhost:15672/  [ user: guest, password: guest ]
+
+>**Note** the QueueConnectorTest posts 100 factorial json messages to the ```request.queue```
 >in the ```afterAll``` method, allowing for convenient testing of a live Akka cluster.
 
 Pack
