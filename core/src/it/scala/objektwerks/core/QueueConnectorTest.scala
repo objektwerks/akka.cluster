@@ -12,14 +12,12 @@ import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
-import org.slf4j.LoggerFactory
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import scala.language.postfixOps
 
 class QueueConnectorTest extends AnyFunSuite with BeforeAndAfterAll {
-  val logger = LoggerFactory.getLogger(getClass)
   implicit val timeout = Timeout(1 second)
 
   val system = ActorSystem.create("queue", ConfigFactory.load("test.akka.conf"))
@@ -30,27 +28,21 @@ class QueueConnectorTest extends AnyFunSuite with BeforeAndAfterAll {
     ()
   }
 
-  test("push pull") {
+  test("push > pull") {
     val queue = new QueueConnector(ConfigFactory.load("test.queue.conf").as[QueueConnectorConf]("queue"))
     clearQueue(queue)
-    logger.debug("*** push pull test: test rabbitmq queue cleared!")
     pushMessagesToRequestQueue(queue, 10)
     pullMessagesFromRequestQueue(queue, 10)
     queue.close()
   }
 
-  test("broker") {
-    val requestQueue = new QueueConnector(ConfigFactory.load("test.request.queue.conf").as[QueueConnectorConf]("queue"))
-    clearQueue(requestQueue)
-    logger.debug("*** broker test: request queue cleared!")
-    pushMessagesToRequestQueue(requestQueue, 10)
-    requestQueue.close()
+  test("queue <> broker <> worker") {
+    val queue = new QueueConnector(ConfigFactory.load("test.queue.conf").as[QueueConnectorConf]("queue"))
+    clearQueue(queue)
+    pushMessagesToRequestQueue(queue, 10)
     broker ! PullRequest
-    Thread.sleep(1000)
-    val responseQueue = new QueueConnector(ConfigFactory.load("test.response.queue.conf").as[QueueConnectorConf]("queue"))
-    clearQueue(responseQueue)
-    logger.debug("*** broker test: response queue cleared!")
-    responseQueue.close()
+    pullMessagesFromRequestQueue(queue, 10)
+    queue.close()
   }
 
   private def pushMessagesToRequestQueue(queue: QueueConnector, count: Int): Unit = {

@@ -29,7 +29,6 @@ lazy val testDependencies = {
     "com.rabbitmq" % "amqp-client" % amqpClientVersion % Provided,
     "com.iheart" %% "ficus" % ficusVersion % Provided,
     "com.typesafe.play" %% "play-json" % playJsonVersion % Provided,
-    "org.slf4j" % "slf4j-api" % slf4jApiVersion % "test, it",
     "ch.qos.logback" % "logback-classic" % logbackClassicVersion % "test, it",
     "org.scalatest" %% "scalatest" % scalatestVersion % "test, it"
   )
