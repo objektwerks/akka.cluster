@@ -21,8 +21,9 @@ lazy val integrationTestSettings = Defaults.itSettings ++ Seq(
 
 lazy val integrationTestDependencies = {
   Seq(
-    "com.rabbitmq" % "amqp-client" % amqpClientVersion % Provided,
-    "com.iheart" %% "ficus" % ficusVersion % Provided,
+    "com.rabbitmq" % "amqp-client" % amqpClientVersion % "test, it",
+    "com.iheart" %% "ficus" % ficusVersion % "test, it",
+    "ch.qos.logback" % "logback-classic" % "1.2.3" % "test, it",
     "org.scalatest" %% "scalatest" % scalatestVersion % "test, it"
   )
 }

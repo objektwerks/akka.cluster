@@ -8,8 +8,11 @@ import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
+import org.slf4j.LoggerFactory
 
 class QueueConnectorTest extends AnyFunSuite with BeforeAndAfterAll {
+  val logger = LoggerFactory.getLogger(getClass)
+
   override protected def afterAll(): Unit = {
     val queue = new QueueConnector(ConfigFactory.load("request.queue.conf").as[QueueConnectorConf]("queue"))
     for (i <- 1 to 10) {
@@ -17,6 +20,7 @@ class QueueConnectorTest extends AnyFunSuite with BeforeAndAfterAll {
       queue.push( Factorial.toJson(factorial) )
     }
     queue.close()
+    logger.info("*** 10 Factorial json messages pushed to request.queue")
   }
 
   test("push > pull") {
