@@ -35,6 +35,10 @@ Routers
 -------
 1. Worker Router - A cluster-aware group router containing a dynamic pool of available remote Worker actors. See Broker actor code.
 
+Command > Event Flow
+--------------------
+1. PullFactorial > ComputeFactorial > FactorialComputed | FactorialTimedOut | FactorialFailed
+
 Design
 ------
 >The cluster is architecturally centered around the Broker actor, which resides on the master node and **dynamically**
