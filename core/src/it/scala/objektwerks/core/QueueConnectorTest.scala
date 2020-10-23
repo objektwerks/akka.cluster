@@ -12,7 +12,7 @@ import org.scalatest.funsuite.AnyFunSuite
 class QueueConnectorTest extends AnyFunSuite with BeforeAndAfterAll {
   override protected def afterAll(): Unit = {
     val queue = new QueueConnector(ConfigFactory.load("request.queue.conf").as[QueueConnectorConf]("queue"))
-    for (i <- 1 to 100) {
+    for (i <- 1 to 10) {
       val factorial = Factorial(numberIn = i, numberOut = 0)
       queue.push( Factorial.toJson(factorial) )
     }
