@@ -6,7 +6,7 @@ val playJsonVersion = "2.9.1"
 val ficusVersion = "1.5.0"
 val slf4jApiVersion = "1.7.30"
 val logbackClassicVersion = "1.2.3"
-val scalatestVersion = "3.2.2"
+val scalatestVersion = "3.2.3"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
