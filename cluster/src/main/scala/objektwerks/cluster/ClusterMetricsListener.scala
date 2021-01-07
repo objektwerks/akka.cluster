@@ -24,10 +24,12 @@ class ClusterMetricsListener extends Actor with ActorLogging {
 
   private def logHeap(nodeMetrics: NodeMetrics): Unit = nodeMetrics match {
     case HeapMemory(_, _, used, _, _) => log.info("Used heap: %.2f MB".format(used.doubleValue / 1024 / 1024))
+    case _ => log.warning(s"*** NodeMetrics match failed: ${nodeMetrics.toString()}")
   }
 
   private def logCpu(nodeMetrics: NodeMetrics): Unit = nodeMetrics match {
     case Cpu(_, _, Some(systemLoadAverage), _, _, processors) =>
       log.info("Average core load: %.2f on %d cores".format(systemLoadAverage, processors))
+    case _ => log.warning(s"*** NodeMetrics match failed: ${nodeMetrics.toString()}")
   }
 }
