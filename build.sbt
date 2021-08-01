@@ -5,7 +5,7 @@ val amqpClientVersion = "5.12.0"
 val playJsonVersion = "2.9.1"
 val ficusVersion = "1.5.0"
 val slf4jApiVersion = "1.7.30"
-val logbackClassicVersion = "1.2.3"
+val logbackClassicVersion = "1.2.5"
 val scalatestVersion = "3.2.9"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
@@ -23,7 +23,7 @@ lazy val integrationTestDependencies = {
   Seq(
     "com.rabbitmq" % "amqp-client" % amqpClientVersion % "test, it",
     "com.iheart" %% "ficus" % ficusVersion % "test, it",
-    "ch.qos.logback" % "logback-classic" % "1.2.3" % "test, it",
+    "ch.qos.logback" % "logback-classic" % logbackClassicVersion % "test, it",
     "org.scalatest" %% "scalatest" % scalatestVersion % "test, it"
   )
 }
