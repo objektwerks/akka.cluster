@@ -6,6 +6,7 @@ val playJsonVersion = "2.9.2"
 val ficusVersion = "1.5.0"
 val slf4jApiVersion = "1.7.32"
 val logbackClassicVersion = "1.2.5"
+val akkaKyroSerializationVersion = "2.2.0"
 val scalatestVersion = "3.2.9"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
@@ -45,7 +46,7 @@ lazy val akkaDependencies = {
     "com.rabbitmq" % "amqp-client" % amqpClientVersion,
     "com.iheart" %% "ficus" % ficusVersion,
     "com.typesafe.play" %% "play-json" % playJsonVersion,
-    "io.altoo" %% "akka-kryo-serialization" % "1.1.5",
+    "io.altoo" %% "akka-kryo-serialization" % akkaKyroSerializationVersion,
     "ch.qos.logback" % "logback-classic" % logbackClassicVersion
   )
 }
