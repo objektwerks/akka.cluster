@@ -5,7 +5,7 @@ val amqpClientVersion = "5.13.0"
 val playJsonVersion = "2.9.2"
 val ficusVersion = "1.5.0"
 val slf4jApiVersion = "1.7.32"
-val logbackClassicVersion = "1.2.5"
+val logbackClassicVersion = "1.2.6"
 val akkaKyroSerializationVersion = "2.2.0"
 val scalatestVersion = "3.2.10"
 
