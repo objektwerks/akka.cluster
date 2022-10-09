@@ -4,10 +4,10 @@ val akkaVersion = "2.6.19"
 val amqpClientVersion = "5.14.2"
 val playJsonVersion = "2.9.2"
 val ficusVersion = "1.5.2"
-val slf4jApiVersion = "1.7.32"
-val logbackClassicVersion = "1.4.1"
+val slf4jApiVersion = "2.0.3"
+val logbackClassicVersion = "1.4.3"
 val akkaKyroSerializationVersion = "2.2.0"
-val scalatestVersion = "3.2.13"
+val scalatestVersion = "3.2.14"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
