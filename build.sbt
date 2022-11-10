@@ -1,6 +1,6 @@
 import xerial.sbt.pack.PackPlugin.packSettings
 
-val akkaVersion = "2.6.19"
+val akkaVersion = "2.7.0"
 val amqpClientVersion = "5.14.2"
 val playJsonVersion = "2.9.2"
 val ficusVersion = "1.5.2"
