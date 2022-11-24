@@ -60,7 +60,9 @@ Timing
 ------
 >The Master actor, created dynamically by the Broker actor, has a time-to-live , which is currently set to:
 
-    ```context.setReceiveTimeout(3 minutes)```
+```
+context.setReceiveTimeout(3 minutes)
+```
 
 >When the **time-to-live** is exceeded, a Master actor receives a ReceiveTimout message, self-terminates and notifies
 the Broker actor, which tells a Queue actor to send a NACK message to RabbitMQ - retaining the origial request on
