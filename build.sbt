@@ -12,7 +12,7 @@ val scalatestVersion = "3.2.15"
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.1-SNAPSHOT",
-  scalaVersion := "2.13.10"
+  scalaVersion := "2.13.11"
 )
 
 lazy val integrationTestSettings = Defaults.itSettings ++ Seq(
