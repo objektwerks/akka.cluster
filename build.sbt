@@ -7,7 +7,7 @@ val ficusVersion = "1.5.2"
 val slf4jApiVersion = "2.0.7"
 val logbackClassicVersion = "1.4.7"
 val akkaKyroSerializationVersion = "2.2.0"
-val scalatestVersion = "3.2.15"
+val scalatestVersion = "3.2.16"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
