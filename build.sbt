@@ -6,7 +6,7 @@ val playJsonVersion = "2.9.2"
 val ficusVersion = "1.5.2"
 val logbackClassicVersion = "1.5.0"
 val akkaKyroSerializationVersion = "2.2.0"
-val scalatestVersion = "3.2.17"
+val scalatestVersion = "3.2.18"
 
 lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
