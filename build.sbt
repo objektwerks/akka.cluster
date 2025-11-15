@@ -4,7 +4,7 @@ val akkaVersion = "2.6.21" // Don't upgrade due to BUSL 1.1!
 val amqpClientVersion = "5.14.2"
 val playJsonVersion = "2.10.4"
 val ficusVersion = "1.5.2"
-val logbackClassicVersion = "1.5.20"
+val logbackClassicVersion = "1.5.21"
 val akkaKyroSerializationVersion = "2.2.0"
 val scalatestVersion = "3.2.19"
 
